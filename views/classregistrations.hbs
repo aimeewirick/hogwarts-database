@@ -1,0 +1,174 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script language="JavaScript">
+   function showform(dowhat) {
+     /*
+     * four DIVS: browse, insert, update, delete
+     * this function sets one visible the others not
+     */
+     if (dowhat == 'insert'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'block';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'none';
+     }
+     else if (dowhat == 'update'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'block';
+       document.getElementById('delete').style.display = 'none';
+     }
+     else if (dowhat == 'delete'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'block';
+     }
+     else if (dowhat == 'all'){
+       document.getElementById('browse').style.display = 'block';
+       document.getElementById('insert').style.display = 'block';
+       document.getElementById('update').style.display = 'block';
+       document.getElementById('delete').style.display = 'block';
+     }
+     else { //by default display browse
+       document.getElementById('browse').style.display = 'block';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'none';
+     }
+   }
+   function newRegistration() { showform('insert'); }
+   function updateRegistration(pid) { showform('update'); }
+   function deleteRegistration(pid) { showform ('delete'); }
+   function browseRegistrations() { showform ('browse'); }
+   function showAll() { showform ('all'); }
+ </script>
+  <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<body onload="browseRegistrations()">
+<title>Class Registrations</title>
+<div class="header">
+<h1>Class Registrations</h1>
+</div>
+<div class="background1">
+{{!-- Create a table --}}
+    <div id="browse">
+    <center>
+    <h3>Students Registered for Classes</h3>
+    </center>
+        <table id = "registration_table" >
+
+            {{!-- Header section --}}
+            <thead>
+
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr class="th1">
+                    <th>Registration ID</th>
+                    <th>Student</th>
+                    <th>Subject</th>
+                    <th>Term</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            {{!-- Body section --}}
+            <tbody>
+                {{!-- For each row, print the registrationID, student, subject, term --}}
+                {{#each data}}
+                <tr data-value="{{this.registrationID}}">
+                    <td>{{this.registrationID}}</td>
+                    <td>{{this.student}}</td>
+                    <td>{{this.subject}}</td>
+                    <td>{{this.term}}</td>
+                    <th><i class="fa-solid fa-trash-can" href="#" onClick="deleteRegistration({{this.registrationID}})"></i></th>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <center>
+            <input class="bigbtn" type="button" value="Add Registration" href="#" onClick="newRegistration()">
+            <input class="bigbtn" type="button" value="Update Registration" href="#" onClick="updateRegistration()">
+        </center>
+    </div><!--end browse-->
+
+<script type="application/javascript" src="./js/delete_registration.js"></script>
+
+<!-- /views/index.hbs -->
+    <center>
+    <div id="insert">
+        <h3>Register a Student for Class</h3>
+        <img src="./img/hermoine.gif" alt="static.wikia.nocookie.net"></img>
+        <p>
+        <a href="https://64.media.tumblr.com/11ec7863f3e752a8f5fc8c6b5b13f266/tumblr_inline_p8a1jgUDxm1rcbgys_500.gif/">Credit for GIF can be found here</a>
+        </p>
+        <h2>Is Granger adding another class?</h2>
+        <p>Enter the registration information below.</p>
+        <form id="add-registration-form" method="POST" action="/add-registration-form">
+            <select name="input-student" id="input-student">
+                <option value="">Select a Student</option>
+                {{#each students}}
+                <option value="{{this.studentID}}">{{this.studentName}}</option>
+                {{/each}}
+            </select>
+            <select name="input-subject" id="input-subject">
+                <option value="">Select a Subject</option>
+                {{#each subjects}}
+                <option value="{{this.subjectID}}">{{this.subjectName}}</option>
+                {{/each}}
+            </select>
+            <select name="input-term" id="input-term">
+                <optgroup label="Term"></optgroup>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+            </select>
+            <input type="submit">
+            <input type="button" value="Cancel" href="#" onClick="browseRegistrations()">
+        </form>
+    </div><!--end insert-->
+    </center>
+<!-- update a registration -->
+    <center>
+    <div id="update">
+        <h3>Edit Registration Information</h3>
+        <p>Enter the new information below.</p>
+        <form id="update-registration-form-ajax">
+
+            <label for="update-registrationID">Registration ID </label>
+            <select name="update-registrationID" id="update-registrationID">
+                <option value="test">Select a Registration</option>
+                {{#each data}}
+                <option value="{{this.registrationID}}">{{this.registrationID}}</option>
+                {{/each}}
+            </select>
+            <label for="update-student">Student </label>
+            <select name="update-student" id="update-student">
+                <option value="test">Select a Student</option>
+                {{#each students}}
+                <option value="{{this.studentID}}">{{this.studentName}}</option>
+                {{/each}}
+            </select>
+            <label for="update-subject">Subject </label>
+            <select name="update-subject" id="update-subject">
+                <option value="test">Select a Subject</option>
+                {{#each subjects}}
+                <option value="{{this.subjectID}}">{{this.subjectName}}</option>
+                {{/each}}
+            </select>
+            <label for="update-term">Term </label>
+            <select name="update-term" id="update-term">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <input type="submit" onClick="browseRegistrations()">
+            <input type="button" value="Cancel" href="#" onClick="browseRegistrations()">
+        </form>
+    </div><!--end update-->
+    </center>
+<script type="application/javascript" src="./js/update_registration.js"></script>
+</div>
+</body>

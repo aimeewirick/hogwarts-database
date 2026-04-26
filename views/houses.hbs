@@ -1,0 +1,122 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script language="JavaScript">
+    function showform(dowhat) {
+    /*
+    * four DIVS: browse,search, insert, update, delete
+    * this function sets one visible the others not
+    */
+    if (dowhat == 'insert'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'block';
+       
+    }
+    else if (dowhat == 'update'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'delete'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'search'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'all'){
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+       
+    }
+    else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+  }
+  function newHouse() { showform('insert'); }
+  function browseHouses() { showform ('browse'); }
+  function showAll() { showform ('all'); }
+</script>
+ <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <body onload="browseHouses()">
+<title>Houses</title>
+<div class="header">
+<h1>Houses</h1>
+</div>
+<div class="background1">
+    <div id="browse">
+    <center>
+    <h3>The Houses of Hogwarts</h3>
+    </center>
+    <center>
+    <table id = "house-table" >
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr class="th1">
+                <th>House ID</th>
+                <th>House Name</th>
+                <th>House Location</th>
+                <th>Head of House</th> 
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the houseID, houseName --}}
+            {{#each data}}
+            <tr data-value="{{this.houseID}}">
+                <td>{{this.houseID}}</td>
+                <td>{{this.houseName}}</td>
+                <td>{{this.location}}</td>
+                <td>{{this.headMaster}}</td>
+                <th><i class="fa-solid fa-trash-can" href="#" onClick="deleteHouse({{this.houseID}})"></i></th>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <input class="bigbtn" type="button" value="Add House" href="#" onClick="newHouse()">
+    </center>
+    <script type="application/javascript" src="./js/delete_house.js"></script>
+    </div><!--end of browse-->
+<!-- /views/index.hbs -->
+    <div id="insert">
+    <center>
+    <h3>Add a new House</h3>
+    <img src="./img/houses.gif" alt="static.wikia.nocookie.net"></img>
+    <p>
+        <a href="https://i.pinimg.com/originals/2b/30/f9/2b30f91e1e6e5a3e27c108759e6a6aaf.gif">Credit for GIF can be found here</a>
+    </p>
+    <h2>We all know there are only 4 houses...  But go ahead, make our day.</h2>
+    <form id="add-house-form" method="POST" action="/add-house-form">
+        <label for="input-houseName">House Name: </label>
+        <input type="text" name="input-houseName" id="input-houseName">
+        <select name="input-location" id="input-location">
+            <option value="">Select a Location</option>
+            {{#each locations}}
+            <option value="{{this.locationID}}">{{this.locationName}}</option>
+            {{/each}}
+        </select>
+        <select name="input-headMaster" id="input-headMaster">
+            <option value="">Select a Head master</option>
+            {{#each headMasters}}
+            <option value="{{this.employeeID}}">{{this.professorName}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit">
+        <input type="button" value="Cancel" href="#" onClick="browseHouses()">
+    </form>
+    </center>
+    </div><!--end of insert-->
+</div>
+</body>

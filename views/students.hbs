@@ -1,0 +1,199 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script language="JavaScript">
+    function showform(dowhat) {
+    /*
+    * four DIVS: browse,search, insert, update, delete
+    * this function sets one visible the others not
+    */
+    if (dowhat == 'insert'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+        document.getElementById('search').style.display = 'none';
+    }
+    else if (dowhat == 'update'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+        document.getElementById('search').style.display = 'none';
+    }
+    else if (dowhat == 'delete'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+        document.getElementById('search').style.display = 'none';
+    }
+    else if (dowhat == 'search'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+        document.getElementById('search').style.display = 'block';
+    }
+    else if (dowhat == 'all'){
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('search').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+    }
+    else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+        document.getElementById('search').style.display = 'none';
+    }
+  }
+  function newStudent() { showform('insert'); }
+  function updateStudent(pid) { showform('update'); }
+  function nullStudent(pid) { showform ('delete'); }
+  function deleteStudent(pid) {showform ('delete');} 
+  function browseStudents() { showform ('browse'); }
+  function searchStudent() { showform('search');}
+  function showAll() { showform ('all'); }
+</script>
+ <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <body onload="browseStudents()">
+<title>Students</title>
+<div class="header">
+<h1>Students</h1>
+</div>
+<div class="background1">
+        <!-- Search by student name-->
+    <div id="search">
+    <center>
+    <h3>Search For a Student</h3>
+    <h2>Trying to find Potter and his friends?</h2>
+    <p>Who gave them that pesky cloak anyway??</p>
+    <form id="search-student-html" method='GET' action='/students'>
+        <label for="input-studentName">Search by Student Name: </label>
+        <input type="text" name="studentName" id="input-studentName-html-search">
+        <input type="submit">
+        <input type="button" value="Cancel" href="#" onClick="browseStudents()">
+    </form>
+    <p>Search by student name or partial name using the field above.</p>
+    </center>
+    </div><!--end of search-->
+    {{!-- Create a table --}}
+    <div id="browse">
+    <center>
+    <h3>Hogwart's Students</h3>
+    </center>
+    <table id ="student-table" >
+        {{!-- Header section --}}
+        <thead>
+            <tr class="th1">
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Student's House</th>
+                <th>Year In School</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the studentID, studentName, studentHouse, yearInSchool --}}
+            {{#each data}}
+            <tr data-value="{{this.studentID}}">
+                <td>{{this.studentID}}</td>
+                <td>{{this.studentName}}</td>
+                <td>{{this.studentHouse}}</td>
+                <td>{{this.yearInSchool}}</td>
+                <th><i class="fa-solid fa-trash-can" href="#" onClick="deleteStudent({{this.studentID}})"></i></th>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <center>
+    <input class="bigbtn" type="button" value="Add Student" href="#" onClick="newStudent()">
+    <input class="bigbtn" type="button" value="Search Student" href="#" onClick="searchStudent()">
+    <input class="bigbtn" type="button" value="Update Student" href="#" onClick="updateStudent()">
+    </center><!--end of browse-->
+    </div>
+    
+    <!-- Add Student -->
+    <div id="insert">
+    <center>
+    <h3>Add a New Student</h3>
+    <img src="./img/sortinghat.gif" alt="static.wikia.nocookie.net"></img>
+    <p>
+    <a href="https://i.pinimg.com/originals/9b/17/a6/9b17a6a36d5105aefe49c6566f9e5ab3.gif">Credit for GIF can be found here</a>
+    </p>
+    <h2>No need to get that old Hat!</h2>
+    <p>Enter the student's information below</p>
+    <form id="add-student-form" method="POST" action="/add-student-form">
+        <label for="input-studentName">Student Name </label>
+        <input type="text" name="input-studentName" id="input-studentName">
+        <label for="input-studentHouse">Student House </label>
+        <select name="input-studentHouse" id="input-studentHouse">
+            <option value="">Select a House</option>
+            {{#each houses}}
+            <option value="{{this.houseID}}">{{this.houseName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-yearInSchool">Year In School </label>
+        <select name="input-yearInSchool" id="input-yearInSchool">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+        <input type="submit">
+        <input type="button" value="Cancel" href="#" onClick="browseStudents()">
+    </form>
+    </center>
+    </div><!--end of Add Student-->
+
+    <!-- update a student's year in school -->
+    <div id="update">
+    <center>
+    <h3>Update a Student's Year in School</h3>
+    <h2>Ahhh another year closer to graduation...</h2>
+    <p>Select the student on the left and update their year in school on the right</p>
+    <form id="/update-student-ajax/">
+
+        <label for="input-studentName">Student Name: </label>
+        <select name="input-studentName" id="mySelect">
+            <option value="0">Select a Student</option>
+            {{#each data}}
+            <option value="{{this.studentID}}">{{this.studentName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-yearInSchool">Year in School </label>
+        <select name="input-yearInSchool" id="input-yearInSchool-update">
+            <option value="0"></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <input type="submit" onClick="browseStudents()">
+        <input type="button" value="Cancel" href="#" onClick="browseStudents()">
+
+    </form>
+    </center>
+    <script type="application/javascript" src="./js/update_student.js"></script>
+    </div><!--end of update-->
+
+    <div id="delete">
+    <form id="/delete-student-ajax/">
+        <legend><strong>Delete Student</strong></legend>
+            <p>Are you sure you wish to delete the following?</p>
+            <input type="hidden" name="studentID" id="deletestudentID" value="1">
+            <label><strong>{{this.studentID}}</strong>{{this.studentID}}</label>
+            <label> <strong>{{this.studentID}}</strong>{{this.studentName}} </label> 
+            <input class="btn" href="#" value="delete"onClick="deleteStudent({{this.studentID}})">
+            <input class="btn" type="button" value="cancel" onClick="browseStudents()">
+    </form> 
+    <script type="application/javascript" src="./js/delete_student.js"></script>
+    </div><!-- delete -->
+</div>
+</body>

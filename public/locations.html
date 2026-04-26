@@ -1,0 +1,346 @@
+<!-- 
+    Created by Wanda Sowa and Aimee Wirick
+    For OSU CS 340
+    5/1/2022
+    Credit to: 
+    https://canvas.oregonstate.edu/courses/1870053/pages/exploration-web-application-technology?module_item_id=22036033 for tables
+    https://www.w3schools.com/howto/howto_css_example_website.asp for style sheet
+    https://fonts.cdnfonts.com/css/harry-potter for font
+    https://colors.dopely.top/inside-colors/colors-in-the-world-of-harry-potter-movies/ for colors
+    https://static.wikia.nocookie.net/warner-bros-entertainment/images/d/df/117843736.jpg/revision/latest?cb=20160227190718 for image
+    And special credit to JK Rowling for content ideas, names and descriptions for our Data Base
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/harry-potter" >
+ <title>Page Title</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <style>
+ @import url('http://fonts.cdnfonts.com/css/harry-potter');
+ @font-face {
+     font-family: 'Harry Potter';
+     font-style: normal;
+     font-weight: 400;
+     src: local('Harry Potter'), url('https://fonts.cdnfonts.com/s/25438/HARRP___.woff') format('woff');
+ }
+ 
+ * {
+   box-sizing: border-box;
+ }
+ 
+ /* Style the body */
+ body {
+   font-family: 'Harry Potter', sans-serif;
+   margin: 0;
+ }
+ 
+ /* Header/logo Title */
+ .header {
+   padding: 5px;
+   text-align: center;
+   background: black;
+   color: white;
+ }
+ 
+ /* Increase the font size of the heading */
+ .header h1 {
+   font-size: 150px;
+ }
+ 
+ h2 {
+     font-family: 'Times New Roman', Times, serif;
+ }
+ h3{
+   font-size: 50px;
+ }
+ p {
+     
+     font-family: sans-serif;
+ 
+ }
+ .background1 {
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #c79de5;
+ }
+ 
+ .background2 {
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #82ce9b;
+ }
+ 
+ /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+ .navbar {
+   overflow: hidden;
+   background-color: #333;
+   position: sticky;
+   position: -webkit-sticky;
+   top: 0;
+ }
+ 
+ /* Style the navigation bar links */
+ .navbar a {
+   float: left;
+   display: block;
+   color: RGB(211, 166, 37);
+   text-align: center;
+   padding: 14px 20px;
+   text-decoration: none;
+ }
+ 
+ 
+ /* Right-aligned link */
+ .navbar a.right {
+   float: right;
+ }
+ 
+ /* Change color on hover */
+ .navbar a:hover {
+   background-color: #ddd;
+   color: RGB(26, 71, 42);
+ }
+ 
+ /* Active/current link */
+ .navbar a.active {
+   background-color: #666;
+   color: white;
+ }
+ 
+ /* Column container */
+ .row {  
+   display: -ms-flexbox; /* IE10 */
+   display: flex;
+   -ms-flex-wrap: wrap; /* IE10 */
+   flex-wrap: wrap;
+ }
+ 
+ .btn{
+   padding: 5px;
+   margin-top: 10px;
+ }
+ /* Create two unequal columns that sits next to each other */
+ /* Sidebar/left column */
+ .side {
+   -ms-flex: 30%; /* IE10 */
+   flex: 30%;
+   background-color: #f1f1f1;
+   padding: 20px;
+ }
+ table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   background-color: white;
+   width: 100%;
+   padding-bottom: 50px;
+   
+ }
+ 
+ td, th {
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding: 8px;
+ }
+ tr:hover{
+  background-color: #f1f1f1;
+ }
+ 
+ tr:nth-child(even) {
+   background-color: #cfcccc;
+ }
+ legend{
+   font-size: x-large;
+ }
+ 
+ label{
+   font-weight: bold;
+ 
+ }
+ 
+ fieldset{
+   font-family: arial, sans-serif;
+   border: none;
+   background: white;
+   padding: 30px;
+   border-radius:5px;
+ }
+ form{
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #c79de5;
+   border: none;
+ }
+ 
+ .bigbtn{
+   
+   font-family:'Harry Potter' ;
+   background-image: linear-gradient(to right, rgb(135, 143, 209) 0%, white 51%, #DD5E89 100%);
+   color: #243c44ef;
+   cursor: pointer;
+   padding: 10px 15px;
+   font-size: 30px;
+   text-decoration: none;
+   border: none;
+   outline-offset: 4px;
+   outline: #282c14;
+   outline-width: 4mm;
+   box-shadow:5px 3px #243c44ef ;
+   border-radius: 5mm;
+   margin: 5mm;
+ 
+ }
+ 
+ .bigbtn:hover{
+   background-image: linear-gradient(to right,#DD5E89 0%, white 51%, rgb(135, 143, 209) 100%);
+   
+ }
+ 
+ /* Main column */
+ .main {   
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   background-color: white;
+   padding: 20px;
+ }
+ 
+ /* Fake image, just for this example */
+ .fakeimg {
+   background-color: #aaa;
+   width: 100%;
+   padding: 20px;
+ }
+ 
+ /* Footer */
+ .footer {
+   padding: 5px;
+   text-align: center;
+   background: #666;
+ }
+ 
+ 
+ /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+ @media screen and (max-width: 700px) {
+   .row {   
+     flex-direction: column;
+   }
+ }
+ 
+ /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+ @media screen and (max-width: 400px) {
+   .navbar a {
+     float: none;
+     width: 100%;
+   }
+ }
+ </style>
+ <title>Locations</title>
+ <script language="JavaScript">
+    function showform(dowhat) {
+        /*
+        * four DIVS: browse, insert, update, delete
+        * this function sets one visible the others not
+        */
+      if (dowhat == 'insert'){
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'block';
+      }
+      else if (dowhat == 'update'){
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+      }
+      else if (dowhat == 'delete'){
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+      }
+      else if (dowhat == 'all'){
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'block';
+      }
+      else { //by default display browse
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'none';
+      }
+    }
+ function newLocation() { showform('insert'); }
+ function browseLocations() { showform ('browse'); }
+ function showAll() { showform ('all'); }
+</script>
+ <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ </head>
+ <body onload="browseLocations()">
+ 
+ <div class="header">
+   <h1>Hogwarts</h1>
+   <p>School of Witchcraft and Wizardry</p>
+ </div>
+ 
+ <div class="navbar">
+  <a href="./">Home</a>
+  <a href="./houses.html">Houses</a>
+  <a href="./students.html">Students</a>
+  <a href="./professors.html">Professors</a>
+  <a href="./subjects.html">Subjects</a>
+  <a href="./locations.html"class="active">Locations</a>
+  <a href="./classregistrations.html">ClassRegistrations</a>
+  <a href="./pets.html">Pets</a>
+</div>
+ <div class="background1">
+   <div id="browse">
+     <center>
+     <h3>Locations</h3>
+     <input class="bigbtn" type="button" value="Add Location" href="#" onClick="newLocation()">
+     </center> 
+    <table >
+    <tr>
+      <th>locationID</th>
+      <th>locationName</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td align="right" >1</td>
+      <td >Gryffindor Tower</td>
+      <td>The Gryffindor Common Room entrance is on the seventh floor in the east wing</td>
+    </tr>
+    <tr>
+      <td align="right" >2</td>
+      <td>Ravenclaw Tower</td>
+      <td>The Ravenclaw Common Room is found on the west side of the castle</td>
+    </tr>
+    <tr>
+      <td align="right" >3</td>
+      <td >Hufflepuff Basement</td>
+      <td>The Hufflepuff Common Room is below ground level behind a stack of barrels near the kitchens.</td>
+    </tr>
+    <tr>
+      <td align="right" >4</td>
+      <td >Slytherin Dungeon</td>
+      <td>The Slytherin Common Room is located in the dungeons, behind an apparently blank stretch of wall.</td>
+    </tr>
+ </table>
+ <p>&nbsp;</p>
+ <!--Credit for the form design goes to the Example bsg pages on the Project Step 3 draft assignment page -->
+</div> <!-- browse -->
+<div id="insert">
+ <form method="POST" id="newLocation">
+     <legend><strong>Add Location</strong></legend>
+       <fieldset class="fields">
+         <label> locationName </label> <input type="text" name="building">
+         <label> description </label> <input type="text" name="description">
+   </fieldset>
+       <input class="btn" type="submit" id="addLocation" value="Add Location">
+       <input class="btn" type="button" value="cancel" onClick="browseLocations()">
+ </form> 
+</div><!-- insert -->
+ 
+ <div class="footer">
+   <h2>Created by Wanda Sowa and Aimee Wirick &copy 2022 </h2>
+ </div>
+ 
+ </body>
+ </html>

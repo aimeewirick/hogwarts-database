@@ -1,0 +1,134 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script language="JavaScript">
+    function showform(dowhat) {
+    /*
+    * four DIVS: browse,search, insert, update, delete
+    * this function sets one visible the others not
+    */
+    if (dowhat == 'insert'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+    }
+    else if (dowhat == 'update'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+    }
+    else if (dowhat == 'delete'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+    }
+    else if (dowhat == 'search'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+    }
+    else if (dowhat == 'all'){
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+    }
+    else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+    }
+  }
+function newLocation() { showform('insert'); }
+function updateLocation(pid) { showform('update'); }
+function browseLocations() { showform ('browse'); }
+function showAll() { showform ('all'); }
+</script>
+ <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <body onload="browseLocations()">
+<title>Locations</title>
+<div class="header">
+    <h1>Locations</h1>
+</div>
+<div class="background1">
+    <div id="browse">
+    <center>
+    <h3>Hogwarts Locations</h3>
+    </center>
+    <table id = "location-table" >
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr class="th1">
+                <th>Location ID</th>
+                <th>Location Name</th>
+                <th>Location Description</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the locationID, locationName, location description --}}
+            {{#each data}}
+            <tr data-value="{{this.locationID}}">
+                <td>{{this.locationID}}</td>
+                <td>{{this.locationName}}</td>
+                <td>{{this.description}}</td>
+                <th><i class="fa-solid fa-trash-can" href="#" onClick="deleteLocation({{this.locationID}})"></i></th>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <center>
+    <input class="bigbtn" type="button" value="Add Location" href="#" onClick="newLocation()">
+    <input class="bigbtn" type="button" value="Update Location" href="#" onClick="updateLocation()">
+    </center>
+    <script type="application/javascript" src="./js/delete_location.js"></script>
+</div><!--end of search-->
+<div id="insert">
+<center>
+<h3>Add a Hogwarts Location</h3>
+<h2>Hogwarts is expanding? </h2>
+<p>Add the location information below</p>
+<form id="add-location-form" method="POST" action="/add-location-form">
+    <label for="input-locationName">Location Name: </label>
+    <input type="text" name="input-locationName" id="input-locationName">
+    <label for="input-description">Location Description: </label>
+    <input type="text" name="input-locationDescription" id="input-locationDescription">
+    <input type="submit">
+</form>
+</center>
+</div><!--end of insert-->
+<!-- update a location -->
+<div id="update">
+<center>
+<h3>Update a Location</h3>
+<h2>Did the Room of Requirements Move Again?</h2>
+<img src="./img/roomofreq.gif" alt="static.wikia.nocookie.net"></img>
+<p>
+    <a href="https://data.whicdn.com/images/347782072/original.gif">Credit for GIF can be found here</a>
+</p>
+<p>Update the location below</p>
+<form id="/update-location-ajax/">
+    <label for="input-locationName">Location Name: </label>
+    <select name="input-locationID" id="mySelect">
+        <option value="test">Select a Location</option>
+        {{#each data}}
+        <option value="{{this.locationID}}">{{this.locationName}}</option>
+        {{/each}}
+    </select>
+    <label for="update-input-description">Location Description: </label>
+    <input type="text" name="update-input-description" id="update-input-description">
+    <input type="submit" onClick="browseLocations()">
+    <input type="button" value="Cancel" href="#" onClick="browseLocations()">
+</form>
+</center>
+<script type="application/javascript" src="./js/update_location.js"></script>
+</div><!--end of update-->
+
+</div>
+</body>

@@ -1,0 +1,87 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+<script language="JavaScript">
+function showform(dowhat) {
+    /*
+    * four DIVS: browse, insert, update, delete
+    * this function sets one visible the others not
+    */
+    if (dowhat == 'insert'){
+    document.getElementById('browse').style.display = 'none';
+    document.getElementById('insert').style.display = 'block';
+    document.getElementById('delete').style.display = 'none';
+    }
+    else if (dowhat == 'delete'){
+    document.getElementById('browse').style.display = 'none';
+    document.getElementById('insert').style.display = 'none';
+    document.getElementById('delete').style.display = 'block';
+    }
+    else if (dowhat == 'all'){
+    document.getElementById('browse').style.display = 'block';
+    document.getElementById('insert').style.display = 'block';
+    document.getElementById('delete').style.display = 'block';
+    }
+    else { //by default display browse
+    document.getElementById('browse').style.display = 'block';
+    document.getElementById('insert').style.display = 'none';
+    document.getElementById('delete').style.display = 'none';
+    }
+}
+   function newProfessor() { showform('insert'); }
+   function deleteProfessor(pid) { showform ('delete'); }
+   function browseProfessors() { showform ('browse'); }
+   function showAll() { showform ('all'); }
+ </script>
+ <body onload="browseProfessors()">
+<title>Professors</title>
+<div class="header">
+<h1>Professors</h1>
+</div>
+<div class="background1">
+
+    <div id="browse">
+    <center>
+    <h3>Hogwart's Professors</h3>
+    </center>
+    <table id ="professor-table">
+        {{!-- Header section --}}
+        <thead class="th1">
+            <tr>
+                <th>Employee ID</th>
+                <th>Professor Name</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the employeeID, employeeName --}}
+            {{#each data}}
+            <tr data-value="{{this.employeeID}}">
+                <td>{{this.employeeID}}</td>
+                <td>{{this.professorName}}</td>
+                <th><i class="fa-solid fa-trash-can" href="#" onClick="deleteProfessor({{this.employeeID}})"></i></th>
+            <script type="application/javascript" src="./js/delete_professor.js"></script>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <center>
+    <input class="bigbtn" type="button" value="Add Professor" href="#" onClick="newProfessor()">
+    </center>
+    </div> <!--end of browse-->
+    <!-- /views/index.hbs -->
+    <div id="insert">
+    <center>
+    <h3>Add a new Professor</h3>
+    <h2>Congratulations on recruiting New Talent! We hope they last longer than their predecessor.</h2>  
+    <p>To add a new professor, please enter their name.</p>
+    <form id="add-professor-form" method="POST" action="/add-professor-form">
+        <label for="input-professorName">Professor Name: </label>
+        <input type="text" name="input-professorName" id="input-professorName">
+        <input type="submit">
+    </form>
+    </center>
+    </div><!--end of insert-->
+</div>
+</body>

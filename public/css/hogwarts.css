@@ -1,0 +1,256 @@
+/*
+CSS Style Sheet
+*/
+/*
+    Created by Wanda Sowa and Aimee Wirick
+    For OSU CS 340
+    5/1/2022
+    Credit to: 
+    https://canvas.oregonstate.edu/courses/1870053/pages/exploration-web-application-technology?module_item_id=22036033 for tables 
+    https://www.w3schools.com/howto/howto_css_example_website.asp for style sheet
+    https://fonts.cdnfonts.com/css/harry-potter for font
+    https://colors.dopely.top/inside-colors/colors-in-the-world-of-harry-potter-movies/ for colors
+    https://static.wikia.nocookie.net/warner-bros-entertainment/images/d/df/117843736.jpg/revision/latest?cb=20160227190718 for image
+    And special credit to JK Rowling for content ideas, names and descriptions for our Data Base
+*/
+@import url('http://fonts.cdnfonts.com/css/harry-potter');
+@font-face {
+    font-family: 'Harry Potter';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Harry Potter'), url('https://fonts.cdnfonts.com/s/25438/HARRP___.woff') format('woff');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: 'Harry Potter', sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 2px;
+  text-align: center;
+  background: black;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 100px;
+}
+
+h2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 40px;
+}
+h3{
+  font-size: 50px;
+}
+h4 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+}
+p {
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.background1 {
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  padding: 50px;
+  background-color: #c79de5;
+}
+
+.background2 {
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  padding: 50px;
+  background-color: #82ce9b;
+}
+
+.background3 {
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  padding: 50px;
+  background-color:  white;
+}
+.italics{
+  font-size: xx-small;
+  font-style: italic;
+}
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: RGB(211, 166, 37);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: RGB(26, 71, 42);
+  color: white;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+.btn{
+  padding: 5px;
+  margin-top: 10px;
+}
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  padding-bottom: 50px;
+  
+}
+
+.th1 {
+  color: black;
+  background-color: #f1f1f1;
+  border: 1px solid #dddddd;
+  pointer-events: none;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:hover{
+  background-color: #f1f1f1;
+ }
+
+tr:nth-child(even) {
+  background-color: #cfcccc;
+}
+legend{
+  font-size: x-large;
+}
+
+label{
+  font-weight: bold;
+
+}
+
+fieldset{
+  font-family: arial, sans-serif;
+  border: none;
+  background: white;
+  padding: 30px;
+  border-radius:5px;
+}
+form{
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  padding: 10px;
+  background-color: #c79de5;
+  border: none;
+}
+
+.bigbtn{
+  
+  font-family:'Harry Potter' ;
+  background-image: linear-gradient(to right, rgb(85, 85, 85) 0%, white 51%, #a2a2a4 100%);
+  color: #243c44ef;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 30px;
+  text-decoration: none;
+  border: none;
+  outline-offset: 4px;
+  outline: #282c14;
+  outline-width: 4mm;
+  box-shadow:5px 3px #243c44ef ;
+  border-radius: 5mm;
+  margin: 5mm;
+
+}
+
+.bigbtn:hover{
+  background-image: linear-gradient(to right,#947b50 0%, white 51%, #825405 100%);
+  
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 5px;
+  text-align: center;
+  background: #666;
+}
+
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}

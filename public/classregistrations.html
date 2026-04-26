@@ -1,0 +1,437 @@
+<!-- 
+    Created by Wanda Sowa and Aimee Wirick
+    For OSU CS 340
+    5/1/2022
+    Credit to: https://canvas.oregonstate.edu/courses/1870053/pages/exploration-web-application-technology?module_item_id=22036033
+    https://www.w3schools.com/howto/howto_css_example_website.asp for style sheet and form functions
+    https://fonts.cdnfonts.com/css/harry-potter for font
+    https://colors.dopely.top/inside-colors/colors-in-the-world-of-harry-potter-movies/ for colors
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/harry-potter" >
+ <title>Page Title</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <style>
+ @import url('http://fonts.cdnfonts.com/css/harry-potter');
+ @font-face {
+     font-family: 'Harry Potter';
+     font-style: normal;
+     font-weight: 400;
+     src: local('Harry Potter'), url('https://fonts.cdnfonts.com/s/25438/HARRP___.woff') format('woff');
+ }
+ 
+ * {
+   box-sizing: border-box;
+ }
+ 
+ /* Style the body */
+ body {
+   font-family: 'Harry Potter', sans-serif;
+   margin: 0;
+ }
+ 
+ /* Header/logo Title */
+ .header {
+   padding: 5px;
+   text-align: center;
+   background: black;
+   color: white;
+ }
+ 
+ /* Increase the font size of the heading */
+ .header h1 {
+   font-size: 150px;
+ }
+ 
+ h2 {
+     font-family: 'Times New Roman', Times, serif;
+ }
+ h3{
+   font-size: 50px;
+ }
+ p {
+     
+     font-family: sans-serif;
+ 
+ }
+ .background1 {
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #c79de5;
+ }
+ 
+ .background2 {
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #82ce9b;
+ }
+ 
+ /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+ .navbar {
+   overflow: hidden;
+   background-color: #333;
+   position: sticky;
+   position: -webkit-sticky;
+   top: 0;
+ }
+ 
+ /* Style the navigation bar links */
+ .navbar a {
+   float: left;
+   display: block;
+   color: RGB(211, 166, 37);
+   text-align: center;
+   padding: 14px 20px;
+   text-decoration: none;
+ }
+ 
+ 
+ /* Right-aligned link */
+ .navbar a.right {
+   float: right;
+ }
+ 
+ /* Change color on hover */
+ .navbar a:hover {
+   background-color: #ddd;
+   color: RGB(26, 71, 42);
+ }
+ 
+ /* Active/current link */
+ .navbar a.active {
+   background-color: #666;
+   color: white;
+ }
+ 
+ /* Column container */
+ .row {  
+   display: -ms-flexbox; /* IE10 */
+   display: flex;
+   -ms-flex-wrap: wrap; /* IE10 */
+   flex-wrap: wrap;
+ }
+ 
+ .btn{
+   padding: 5px;
+   margin-top: 10px;
+ }
+ /* Create two unequal columns that sits next to each other */
+ /* Sidebar/left column */
+ .side {
+   -ms-flex: 30%; /* IE10 */
+   flex: 30%;
+   background-color: #f1f1f1;
+   padding: 20px;
+ }
+ table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   background-color: white;
+   width: 100%;
+   padding-bottom: 50px;
+   
+ }
+ 
+ td, th {
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding: 8px;
+ }
+ tr:hover{
+  background-color: #f1f1f1;
+ }
+ 
+ tr:nth-child(even) {
+   background-color: #cfcccc;
+ }
+ legend{
+   font-size: x-large;
+ }
+ 
+ label{
+   font-weight: bold;
+ 
+ }
+ 
+ fieldset{
+   font-family: arial, sans-serif;
+   border: none;
+   background: white;
+   padding: 30px;
+   border-radius:5px;
+ }
+ form{
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   padding: 50px;
+   background-color: #c79de5;
+   border: none;
+ }
+ 
+ .bigbtn{
+   
+   font-family:'Harry Potter' ;
+   background-image: linear-gradient(to right, rgb(135, 143, 209) 0%, white 51%, #DD5E89 100%);
+   color: #243c44ef;
+   cursor: pointer;
+   padding: 10px 15px;
+   font-size: 30px;
+   text-decoration: none;
+   border: none;
+   outline-offset: 4px;
+   outline: #282c14;
+   outline-width: 4mm;
+   box-shadow:5px 3px #243c44ef ;
+   border-radius: 5mm;
+   margin: 5mm;
+ 
+ }
+ 
+ .bigbtn:hover{
+   background-image: linear-gradient(to right,#DD5E89 0%, white 51%, rgb(135, 143, 209) 100%);
+   
+ }
+ 
+ /* Main column */
+ .main {   
+   -ms-flex: 70%; /* IE10 */
+   flex: 70%;
+   background-color: white;
+   padding: 20px;
+ }
+ 
+ /* Fake image, just for this example */
+ .fakeimg {
+   background-color: #aaa;
+   width: 100%;
+   padding: 20px;
+ }
+ 
+ /* Footer */
+ .footer {
+   padding: 5px;
+   text-align: center;
+   background: #666;
+ }
+ 
+ 
+ /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+ @media screen and (max-width: 700px) {
+   .row {   
+     flex-direction: column;
+   }
+ }
+ 
+ /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+ @media screen and (max-width: 400px) {
+   .navbar a {
+     float: none;
+     width: 100%;
+   }
+ }
+ </style>
+ <script language="JavaScript">
+   function showform(dowhat) {
+     /*
+     * four DIVS: browse, insert, update, delete
+     * this function sets one visible the others not
+     */
+     if (dowhat == 'insert'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'block';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'none';
+     }
+     else if (dowhat == 'update'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'block';
+       document.getElementById('delete').style.display = 'none';
+     }
+     else if (dowhat == 'delete'){
+       document.getElementById('browse').style.display = 'none';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'block';
+     }
+     else if (dowhat == 'all'){
+       document.getElementById('browse').style.display = 'block';
+       document.getElementById('insert').style.display = 'block';
+       document.getElementById('update').style.display = 'block';
+       document.getElementById('delete').style.display = 'block';
+     }
+     else { //by default display browse
+       document.getElementById('browse').style.display = 'block';
+       document.getElementById('insert').style.display = 'none';
+       document.getElementById('update').style.display = 'none';
+       document.getElementById('delete').style.display = 'none';
+     }
+   }
+   function newRegistration() { showform('insert'); }
+   function updateRegistration(pid) { showform('update'); }
+   function deleteRegistration(pid) { showform ('delete'); }
+   function browseRegisrations() { showform ('browse'); }
+   function showAll() { showform ('all'); }
+ </script>
+ <script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ </head>
+ <body onload="browseRegisrations()">
+ 
+ <div class="header">
+   <h1>Hogwarts</h1>
+   <p>School of Witchcraft and Wizardry</p>
+ </div>
+ 
+ <div class="navbar">
+  <a href="./">Home</a>
+  <a href="./houses.html">Houses</a>
+  <a href="./students.html">Students</a>
+  <a href="./professors.html">Professors</a>
+  <a href="./subjects.html">Subjects</a>
+  <a href="./locations.html">Locations</a>
+  <a href="./classregistrations.html"class="active">ClassRegistrations</a>
+  <a href="./pets.html">Pets</a>
+</div>
+ <div class="background1">
+   <div id="browse">
+     <center>
+     <h3>Class Registrations</h3>
+     <input class="bigbtn" type="button" value="Add Class Registration" href="#" onClick="newRegistration()">
+     </center>
+     <table>
+       <tr>
+         <th>Edit</th>
+         <th>Registration ID</th>
+         <th>Student</th>
+         <th>Subject</th>
+         <th>Term</th>
+         <th>Delete</th>
+       </tr>
+       <tr>
+         <th><i class="fa-regular fa-pen-to-square"href="#" onClick="updateRegistration('this.registrationID')"></i></th>
+         <td>1</td>
+         <td>Hermoine Granger</td>
+         <td>Potions</td>
+         <td>2</td>
+         <th><i class="fa-solid fa-trash-can"href="#" onclick="deleteRegistration('this.registrationID')"></i></th>
+       </tr>
+       <tr>
+         <th><i class="fa-regular fa-pen-to-square"href="#" onClick="updateRegistration('this.registrationID')"></i></th>
+         <td>2</td>
+         <td>Ron Weasley</td>
+         <td>Defense Against The Dark Arts</td>
+         <td>2</td>
+         <th><i class="fa-solid fa-trash-can"href="#" onclick="deleteRegistration('this.registrationID')"></i></th>
+       </tr>
+       <tr>
+         <th><i class="fa-regular fa-pen-to-square"href="#" onClick="updateRegistration('this.registrationID')"></i></th>
+         <td>3</td>
+         <td>Luna Lovegood</td>
+         <td>Divination</td>
+         <td>4</td>
+         <th><i class="fa-solid fa-trash-can"href="#" onclick="deleteRegistration('this.registrationID')"></i></th>
+       </tr>
+       <tr>
+         <th><i class="fa-regular fa-pen-to-square"href="#" onClick="updateRegistration('this.registrationID')"></i></th>
+         <td>4</td>
+         <td>Cedric Diggory</td>
+         <td>Divination</td>
+         <td>4</td>
+         <th><i class="fa-solid fa-trash-can"href="#" onclick="deleteRegistration('this.registrationID')"></i></th>
+       </tr>
+     </table>
+    
+   </div><!-- browse -->
+   <div id="insert">
+     <form method="POST" id="addRegistration">
+       <legend><strong>Add Registration</strong></legend>
+         <fieldset class="fields" border="none">
+           <label> Student </label> <select name="student">
+             <option value="1">Hermoine Granger</option>
+             <option value="2">Ron Weasley</option>
+             <option value="3">Luna Lovegood</option>
+             <option value="4">Cedric Diggory</option>
+             </select>
+           <label> Subject </label> <select name="subject">
+             <option value="1">Potions</option>
+             <option value="2">Defense Against The Dark Arts</option>
+             <option value="3">Herbology</option>
+             <option value="4">Divination</option>
+             </select>
+            <label> Term </label> <select name="term">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            </select>
+             <center>
+             <input class="btn" type="submit" id="addRegistration" value="Add Registration">
+             <input class="btn" type="button" value="cancel" onClick="browseRegisrations()">
+             </center>
+         </fieldset>
+         
+     </form> 
+   </div><!-- insert -->
+ </div>
+ <div id="update">
+     <form method="POST" id="updateRegistration">
+         <legend><strong>Update Registration</strong></legend>
+           <fieldset class="fields">
+           <input type="hidden" name="registrationID" id="updateregistrationID" value="1">
+           <label> ID: </label> 1
+             <label> Student Name </label> <select name="studentname">
+               <option value="0">&nbsp;</option>
+                 <option value="1" selected>Hermoine Granger</option>
+                 <option value="2">Ronald Weasley</option>
+                 <option value="3">Luna Lovegood</option>
+                 <option value="4">Cedric Diggory</option>
+                 </select>
+             <label> Subject </label> <select name="subject">
+               <option value="1">Potions</option>
+               <option value="2">Defense Against The Dark Arts</option>
+               <option value="3">Herbology</option>
+               <option value="4">Divination</option>
+               </select>
+             <label> Term </label> <select name="term">
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <option value="4">4</option>
+               </select>
+             <center>
+             <input class="btn" type="submit" id="UpdateSaveRegistration" value="Save Update">
+             <input class="btn" type="button" value="cancel" onClick="browseRegisrations()">
+             </center>
+       </fieldset>
+          
+   </form> 
+ </div><!-- update -->
+ <div id="delete" style="display: block">
+   <form method="POST" id="deleteRegistration">
+       <legend><strong>Delete Registration</strong></legend>
+           <fieldset class="fields">
+           <p>Are you sure you wish to delete the following?</p>
+           <input type="hidden" name="registrationID" id="deleteregistrationID" value="1">
+           <label><strong>ID:</strong></label> 1
+             <label> <strong>Student</strong> </label> Hermoine Granger
+             <label> <strong>Subject</strong> </label> Potions
+           <center>
+           <input class="btn" type="submit" id="deleteRegistration" value="Delete Registration">
+           <input class="btn" type="button" value="cancel" onClick="browseRegisrations()">
+           </center>
+     </fieldset>
+    
+   </form> 
+ </div><!-- delete -->
+ <div class="footer">
+   <h2>Created by Wanda Sowa and Aimee Wirick &copy 2022 </h2>
+ </div>
+ 
+ </body>
+ </html>

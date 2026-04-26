@@ -1,0 +1,123 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+ <script language="JavaScript">
+    function showform(dowhat) {
+    /*
+    * four DIVS: browse,search, insert, update, delete
+    * this function sets one visible the others not
+    */
+    if (dowhat == 'insert'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'block';
+       
+    }
+    else if (dowhat == 'update'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'delete'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'search'){
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+    else if (dowhat == 'all'){
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+       
+    }
+    else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+       
+    }
+  }
+
+function browsePets() { showform ('browse'); }
+function newPet() { showform('insert'); }
+function showAll() { showform ('all'); }
+</script>
+<script src="https://kit.fontawesome.com/8affdb6118.js" crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<body onload="browsePets()">
+<title>Pets</title>
+<div class ="header">
+<h1>Pets</h1>
+</div>
+<div class="background1">
+    <div id="browse">
+    <center>
+    <h3>Registered Pets at Hogwarts</h3>
+    {{!-- Create a table --}}
+    <table id = "pet-table" >
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr class="th1">
+                <th>Pet ID</th>
+                <th>Pet Name</th>
+                <th>Species</th>
+                <th>Student Owner</th>
+                <th>Description</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the studentID, studentName, studentHouse, yearInSchool --}}
+            {{#each data}}
+            <tr data-value="{{this.petID}}">
+                <td>{{this.petID}}</td>
+                <td>{{this.petName}}</td>
+                <td>{{this.species}}</td>
+                <td>{{this.studentOwner}}</td>
+                <td>{{this.description}}</td>
+                <th><i class="fa-solid fa-trash-can" href="#" onClick="deletePet({{this.petID}})"></i></th>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <input class="bigbtn" type="button" value="Add Pet" href="#" onClick="newPet()">
+    </center>
+    <script type="application/javascript" src="./js/delete_pet.js"></script>
+    </div><!--end of browse-->
+    <!-- /views/index.hbs -->
+    <div id="insert">
+    <center>
+    <h3>Add a Pet</h3>
+
+    <img src="./img/crookshanks.gif" alt="static.wikia.nocookie.net"></img>
+    <p>
+        <a href="https://i.pinimg.com/originals/f6/35/dc/f635dcd5b41d91abe3f5815cf616fa56.gif">Credit for GIF can be found here</a>
+    </p>
+    <p>Enter Pet information below</p>
+    <form id="add-pet-form" method="POST" action="/add-pet-form">
+        <label for="input-petName">Pet Name: </label>
+        <input type="text" name="input-petName" id="input-petName">
+        <label for="input-species">Species: </label>
+        <input type="text" name="input-species" id="input-species">
+        <select name="input-studentOwner" id="input-studentOwner">
+            <option value="">Select a Student</option>
+            {{#each studentOwners}}
+            <option value="{{this.studentID}}">{{this.studentName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-description">Description: </label>
+        <input type="text" name="input-description" id="input-description">
+
+        <input type="submit">
+    </form>
+    </center>
+    </div><!--end of insert-->
+</div><!--end of background-->
+</body>
+</html>
