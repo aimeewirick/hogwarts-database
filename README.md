@@ -8,7 +8,7 @@ A fully normalized relational database management system themed around the wizar
 **Academic Integrity Note:** This project was built as an educational exercise for OSU CS340. All Harry Potter themed content, names, and descriptions are the intellectual property of J.K. Rowling and Warner Bros. Entertainment. This project is not affiliated with or endorsed by either.
 
 ---
-
+![Hogwarts Demo](demo.gif)
 ## ✨ Features
 
 - **Full CRUD operations** across all seven entities — Create, Read, Update, and Delete for every table
